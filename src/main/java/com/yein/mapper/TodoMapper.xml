@@ -3,7 +3,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.yein.dao.TodoMapper">
+<mapper namespace="com.yein.mapper.TodoMapper">
 
 	<select id="getList" resultType="com.yein.domain.Todo">
 	<![CDATA[
@@ -18,8 +18,8 @@
 			select seq_todo.nextval from dual
 		</selectKey>
 
-		insert into todo (no,title,content, expdate)
-		values (#{no}, #{title}, #{content}, #{expdate})
+		insert into todo (no,title,content, expDate)
+		values (#{no}, #{title}, #{content}, #{expDate})
 	</insert>
 
 	<select id="read" resultType="com.yein.domain.Todo">
@@ -36,8 +36,8 @@
             <if test="content != null">
                  content = #{content},
             </if>
-            <if test="expdate != null" >
-            	expdate = #{expdate},
+            <if test="expDate != null" >
+            	expDate = #{expDate},
             </if>
         </set>
         where no = #{no}

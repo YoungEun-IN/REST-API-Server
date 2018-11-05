@@ -1,4 +1,4 @@
-package com.yein.dao;
+package com.yein.mapper;
 
 import java.util.List;
 
@@ -10,7 +10,7 @@ import com.yein.domain.Todo;
 public interface TodoMapper {
     public List<Todo> getList();
 	public void insert(Todo todo);
-	public Todo read(long bno);
+	public Todo read(int no);
 	public void update(Todo todo);
-	public void delete(long bno);
+	public void delete(int no);
 }
