@@ -40,7 +40,7 @@ public class TodoServiceImpl implements TodoService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response insert(Todo todo) {
 		mapper.insert(todo);
-		return Response.status(200).build();
+		return Response.status(200).entity(todo + "insert success").build();
 	}
 
 	@Path("/read/{no}")
@@ -57,7 +57,7 @@ public class TodoServiceImpl implements TodoService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response update(Todo todo) {
 		mapper.update(todo);
-		return Response.status(200).build();
+		return Response.status(200).entity(todo + "update success").build();
 	}
 
 	@Path("/delete/{no}")
@@ -66,6 +66,6 @@ public class TodoServiceImpl implements TodoService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response delete(@PathParam("no") int no) {
 		mapper.delete(no);
-		return Response.status(200).build();
+		return Response.status(200).entity("todo number" + no + "delete success").build();
 	}
 }
