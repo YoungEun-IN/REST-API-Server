@@ -8,6 +8,6 @@ public interface TodoService {
 	Response getList();
 	Response insert(Todo todo);
 	Response read(int no);
-	Response update(Todo todo);
+	Response update(int no, Todo todo);
 	Response delete(int no);
 }

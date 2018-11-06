@@ -17,8 +17,8 @@ import javax.ws.rs.core.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.yein.mapper.TodoMapper;
 import com.yein.domain.Todo;
+import com.yein.mapper.TodoMapper;
 
 @Service
 @Path("/todo")
@@ -26,7 +26,7 @@ public class TodoServiceImpl implements TodoService {
 	@Autowired
 	private TodoMapper mapper;
 
-	@Path("/getList")
+	//목록조회
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getList() {
@@ -34,38 +34,42 @@ public class TodoServiceImpl implements TodoService {
 		return Response.status(200).entity(todos).build();
 	}
 
-	@Path("/insert")
+	//삽입
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response insert(Todo todo) {
 		mapper.insert(todo);
-		return Response.status(200).entity(todo + "insert success").build();
+		return Response.status(200).entity(todo.toString() + " insert success").build();
 	}
-
-	@Path("/read/{no}")
+	
+	//조회
+	@Path("/{no}")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response read(@PathParam("no") int no) throws NotFoundException {
 		Todo todo = mapper.read(no);
 		return Response.status(200).entity(todo).build();
 	}
-
-	@Path("/update")
+	
+	//수정
+	@Path("/{no}")
 	@PUT
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response update(Todo todo) {
+	public Response update(@PathParam("no") int no, Todo todo) {
+		todo.setNo(no);
 		mapper.update(todo);
-		return Response.status(200).entity(todo + "update success").build();
+		return Response.status(200).entity(todo.toString() + " update success").build();
 	}
-
-	@Path("/delete/{no}")
+	
+	//삭제
+	@Path("/{no}")
 	@DELETE
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response delete(@PathParam("no") int no) {
 		mapper.delete(no);
-		return Response.status(200).entity("todo number" + no + "delete success").build();
+		return Response.status(200).entity("todo number " + no + " delete success").build();
 	}
 }

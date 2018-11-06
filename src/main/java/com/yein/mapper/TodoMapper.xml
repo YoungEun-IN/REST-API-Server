@@ -9,6 +9,7 @@
 	<![CDATA[
 		select *
 		from todo
+		order by no
 		]]>
 	</select>
 

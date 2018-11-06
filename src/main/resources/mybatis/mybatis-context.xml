@@ -35,7 +35,7 @@
 			value="com.yein.domain" />
 	</bean>
 
-	<mybatis-spring:scan base-package="com.yein.dao" />
+	<mybatis-spring:scan base-package="com.yein.mapper" />
 
 	<bean id="sqlSessionTemplate"
 		class="org.mybatis.spring.SqlSessionTemplate">
