@@ -7,7 +7,7 @@
 
 	<select id="getList" resultType="com.yein.domain.Todo">
 	<![CDATA[
-		select *
+		select no,title,content, regDate, expDate
 		from todo
 		order by no
 		]]>
@@ -20,11 +20,11 @@
 		</selectKey>
 
 		insert into todo (no,title,content, expDate)
-		values (#{no}, #{title}, #{content}, to_char(#{expDate},'yyyy-MM-dd'))
+		values (#{no}, #{title}, #{content}, #{expDate})
 	</insert>
 
 	<select id="read" resultType="com.yein.domain.Todo">
-		select *
+		select no,title,content, regDate, expDate
 		from todo 
 		where no = #{no}
 	</select>

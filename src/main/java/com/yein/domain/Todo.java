@@ -1,17 +1,22 @@
 package com.yein.domain;
 
-import java.util.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import org.springframework.stereotype.Component;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonFormat.Shape;
 
 @Component
 public class Todo {
 	private int no;
 	private String title;
 	private String content;
-	private Date regDate;
+	@JsonFormat(shape = Shape.STRING, pattern = "yyyy-MM-dd", timezone = "GMT+9")
+	private Date regDate = new Date(System.currentTimeMillis());
+	@JsonFormat(shape = Shape.STRING, pattern = "yyyy-MM-dd", timezone = "GMT+9")
 	private Date expDate;
 
 	public Todo() {
@@ -41,10 +46,8 @@ public class Todo {
 		this.content = content;
 	}
 
-	public String getRegdate() {
-		SimpleDateFormat df = new SimpleDateFormat("yy/mm/dd");
-		String date = df.format(regDate);
-		return date;
+	public Date getRegDate() {
+		return regDate;
 	}
 
 	public void setRegDate(String regDate) {
@@ -62,10 +65,8 @@ public class Todo {
 		this.regDate = date;
 	}
 
-	public String getExpDate() {
-		SimpleDateFormat df = new SimpleDateFormat("yyyy-mm-dd");
-		String date = df.format(expDate);
-		return date;
+	public Date getExpDate() {
+		return expDate;
 	}
 
 	public void setExpDate(String expDate) {
@@ -77,12 +78,11 @@ public class Todo {
 			e.printStackTrace();
 		}
 		this.expDate = date;
-		System.out.println(this.expDate);
 	}
 
 	@Override
 	public String toString() {
-		return "Todo [no=" + no + ", title=" + title + ", content=" + content + ", regdate=" + regDate + ", expDate="
+		return "Todo [no=" + no + ", title=" + title + ", content=" + content + ", regDate=" + regDate + ", expDate="
 				+ expDate + "]";
 	}
 }
