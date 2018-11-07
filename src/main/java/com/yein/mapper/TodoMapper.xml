@@ -20,7 +20,7 @@
 		</selectKey>
 
 		insert into todo (no,title,content, expDate)
-		values (#{no}, #{title}, #{content}, #{expDate})
+		values (#{no}, #{title}, #{content}, to_char(#{expDate},'yyyy-MM-dd'))
 	</insert>
 
 	<select id="read" resultType="com.yein.domain.Todo">

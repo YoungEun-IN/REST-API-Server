@@ -12,7 +12,7 @@ public class Todo {
 	private String title;
 	private String content;
 	private Date regDate;
-	private String expDate;
+	private Date expDate;
 
 	public Todo() {
 	}
@@ -41,12 +41,18 @@ public class Todo {
 		this.content = content;
 	}
 
-	public Date getRegdate() {
-		return regDate;
+	public String getRegdate() {
+		SimpleDateFormat df = new SimpleDateFormat("yy/mm/dd");
+		String date = df.format(regDate);
+		return date;
 	}
 
 	public void setRegDate(String regDate) {
-		SimpleDateFormat df = new SimpleDateFormat("yyyy-mm-dd"); 
+		System.out.println(regDate);
+		if (regDate == null) {
+			return;
+		}
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 		Date date = null;
 		try {
 			date = df.parse(regDate);
@@ -57,11 +63,21 @@ public class Todo {
 	}
 
 	public String getExpDate() {
-		return expDate;
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-mm-dd");
+		String date = df.format(expDate);
+		return date;
 	}
-	
+
 	public void setExpDate(String expDate) {
-		this.expDate = expDate;
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+		Date date = null;
+		try {
+			date = df.parse(expDate);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		this.expDate = date;
+		System.out.println(this.expDate);
 	}
 
 	@Override
