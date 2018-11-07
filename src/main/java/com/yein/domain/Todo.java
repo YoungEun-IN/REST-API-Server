@@ -1,7 +1,5 @@
 package com.yein.domain;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.springframework.stereotype.Component;
@@ -50,34 +48,16 @@ public class Todo {
 		return regDate;
 	}
 
-	public void setRegDate(String regDate) {
-		System.out.println(regDate);
-		if (regDate == null) {
-			return;
-		}
-		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-		Date date = null;
-		try {
-			date = df.parse(regDate);
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-		this.regDate = date;
+	public void setRegDate(Date regDate) {
+		this.regDate = regDate;
 	}
 
 	public Date getExpDate() {
 		return expDate;
 	}
 
-	public void setExpDate(String expDate) {
-		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-		Date date = null;
-		try {
-			date = df.parse(expDate);
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-		this.expDate = date;
+	public void setExpDate(Date expDate) {
+		this.expDate = expDate;
 	}
 
 	@Override
