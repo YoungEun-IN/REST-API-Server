@@ -1,5 +1,6 @@
 package com.yein.domain;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.springframework.stereotype.Component;
@@ -62,7 +63,8 @@ public class Todo {
 
 	@Override
 	public String toString() {
-		return "Todo [no=" + no + ", title=" + title + ", content=" + content + ", regDate=" + regDate + ", expDate="
-				+ expDate + "]";
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		return "Todo [no=" + no + ", title=" + title + ", content=" + content + ", regDate=" + sdf.format(regDate) + ", expDate="
+				+ sdf.format(expDate) + "]";
 	}
 }

@@ -42,7 +42,7 @@
 		where no = #{no}
 	</update>
 
-	<delete id="delete" parameterType="_int">
+	<delete id="delete">
 		DELETE FROM TODO
 		WHERE no = #{no}
 	</delete>
