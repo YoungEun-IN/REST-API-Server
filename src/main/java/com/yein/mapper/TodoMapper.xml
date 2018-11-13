@@ -14,38 +14,36 @@
 	</select>
 
 	<insert id="insert">
-		<selectKey keyProperty="no" order="BEFORE"
-			resultType="int">
-			select seq_todo.nextval from dual
-		</selectKey>
-
 		insert into todo (no,title,content, expDate)
-		values (#{no}, #{title}, #{content}, #{expDate})
+		values
+		(#{no}, #{title}, #{content}, #{expDate})
 	</insert>
 
 	<select id="read" resultType="com.yein.domain.Todo">
-		select no,title,content, regDate, expDate
-		from todo 
+		select no,title,content, regDate,
+		expDate
+		from todo
 		where no = #{no}
 	</select>
-    
-    <update id="update">
-        update Todo
-        <set>
-            <if test="title != null">
-            	title = #{title},</if>
-            <if test="content != null">
-                 content = #{content},
-            </if>
-            <if test="expDate != null" >
-            	expDate = #{expDate},
-            </if>
-        </set>
-        where no = #{no}
-    </update>
-    
-    <delete id="delete" parameterType="_int">
-        DELETE FROM TODO 
-        WHERE no = #{no}
-    </delete>
+
+	<update id="update">
+		update Todo
+		<set>
+			<if test="title != null">
+				title = #{title},
+			</if>
+			<if test="content != null">
+				content = #{content},
+			</if>
+			<if test="expDate != null">
+				expDate = #{expDate},
+			</if>
+		</set>
+		where no = #{no}
+	</update>
+
+	<delete id="delete" parameterType="_int">
+		DELETE FROM TODO
+		WHERE no = #{no}
+	</delete>
 </mapper>

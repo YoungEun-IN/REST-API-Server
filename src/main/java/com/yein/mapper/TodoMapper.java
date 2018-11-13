@@ -10,7 +10,7 @@ import com.yein.domain.Todo;
 public interface TodoMapper {
     public List<Todo> getList();
 	public void insert(Todo todo);
-	public Todo read(int no);
+	public Todo read(Todo todo);
 	public void update(Todo todo);
-	public void delete(int no);
+	public void delete(Todo todo);
 }

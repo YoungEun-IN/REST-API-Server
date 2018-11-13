@@ -9,7 +9,6 @@ import javax.ws.rs.NotFoundException;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -28,17 +27,19 @@ public class TodoServiceImpl implements TodoService {
 
 	// 목록조회
 	@GET
+	@Path("/list")
 	@Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
 	public Response getList() {
 		List<Todo> todos = mapper.getList();
 		System.out.println(todos.toString());
 		return Response.status(200).
 				header("Content-Type", "application/json;charset=UTF-8")
-				.entity(todos).build();
+				.entity(todos + " list success").build();
 	}
 
 	// 삽입
 	@POST
+	@Path("/insert")
 	@Consumes(MediaType.APPLICATION_JSON + ";charset=utf-8")
 	@Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
 	public Response insert(Todo todo) {
@@ -49,23 +50,22 @@ public class TodoServiceImpl implements TodoService {
 	}
 
 	// 조회
-	@Path("/{no}")
 	@GET
+	@Path("/read")
 	@Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
-	public Response read(@PathParam("no") int no) throws NotFoundException {
-		Todo todo = mapper.read(no);
+	public Response read(Todo todo) throws NotFoundException {
+		mapper.read(todo);
 		return Response.status(200)
 				.header("Content-Type", "application/json;charset=UTF-8")
 				.entity(todo).build();
 	}
 
 	// 수정
-	@Path("/{no}")
 	@PUT
+	@Path("/update")
 	@Consumes(MediaType.APPLICATION_JSON + ";charset=utf-8")
 	@Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
-	public Response update(@PathParam("no") int no, Todo todo) {
-		todo.setNo(no);
+	public Response update(Todo todo) {
 		mapper.update(todo);
 		return Response.status(200)
 				.header("Content-Type", "application/json;charset=UTF-8")
@@ -73,14 +73,14 @@ public class TodoServiceImpl implements TodoService {
 	}
 
 	// 삭제
-	@Path("/{no}")
 	@DELETE
+	@Path("/delete")
 	@Consumes(MediaType.APPLICATION_JSON + ";charset=utf-8")
 	@Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
-	public Response delete(@PathParam("no") int no) {
-		mapper.delete(no);
+	public Response delete(Todo todo) {
+		mapper.delete(todo);
 		return Response.status(200)
 				.header("Content-Type", "application/json;charset=UTF-8")
-				.entity("todo number " + no + " delete success").build();
+				.entity(todo.toString() + " delete success").build();
 	}
 }
