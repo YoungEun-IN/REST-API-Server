@@ -26,7 +26,9 @@ public class TodoServiceImpl implements TodoService {
 	@Path("/list")
 	@Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
 	public Response getList() {
+		System.out.println("요청들어옴");
 		List<Todo> todos = mapper.getList();
+		System.out.println(todos.get(0).toString());
 		return Response.status(200).header("Content-Type", "application/json;charset=UTF-8").entity(todos).build();
 	}
 
