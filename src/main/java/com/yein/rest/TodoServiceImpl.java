@@ -26,9 +26,7 @@ public class TodoServiceImpl implements TodoService {
 	@Path("/list")
 	@Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
 	public Response getList() {
-		System.out.println("요청들어옴");
 		List<Todo> todos = mapper.getList();
-		System.out.println(todos.get(0).toString());
 		return Response.status(200).header("Content-Type", "application/json;charset=UTF-8").entity(todos).build();
 	}
 
@@ -56,9 +54,9 @@ public class TodoServiceImpl implements TodoService {
 	@Path("/read")
 	@Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
 	public Response read(Todo todo) {
-		if ( mapper.read(todo) == null) {
+		if (mapper.read(todo) == null) {
 			return Response.status(200).header("Content-Type", "application/json;charset=UTF-8")
-					.entity(todo.getNo() +"번 데이터  조회 실패. \n데이터가 없습니다.").build();
+					.entity(todo.getNo() + "번 데이터  조회 실패. \n데이터가 없습니다.").build();
 		} else
 			return Response.status(200).header("Content-Type", "application/json;charset=UTF-8").entity(todo).build();
 	}
@@ -72,6 +70,9 @@ public class TodoServiceImpl implements TodoService {
 		if (mapper.read(todo) == null) {
 			return Response.status(200).header("Content-Type", "application/json;charset=UTF-8")
 					.entity(todo.toString() + " \n 수정 실패. 데이터가 없습니다.").build();
+		} else if (todo.getRegDate().after(todo.getExpDate())) {
+			return Response.status(200).header("Content-Type", "application/json;charset=UTF-8")
+					.entity(todo.toString() + " \n 수정 실패. 만료일은 등록일 이후여야 합니다.").build();
 		} else {
 			mapper.update(todo);
 			return Response.status(200).header("Content-Type", "application/json;charset=UTF-8")
@@ -87,11 +88,11 @@ public class TodoServiceImpl implements TodoService {
 	public Response delete(Todo todo) {
 		if (mapper.read(todo) == null) {
 			return Response.status(200).header("Content-Type", "application/json;charset=UTF-8")
-					.entity(todo.getNo() +"번 데이터  삭제 실패.\n 데이터가 없습니다.").build();
+					.entity(todo.getNo() + "번 데이터  삭제 실패.\n 데이터가 없습니다.").build();
 		} else {
 			mapper.delete(todo);
 			return Response.status(200).header("Content-Type", "application/json;charset=UTF-8")
-					.entity(todo.getNo() +"번 데이터  삭제 성공").build();
+					.entity(todo.getNo() + "번 데이터  삭제 성공").build();
 		}
 	}
 }
