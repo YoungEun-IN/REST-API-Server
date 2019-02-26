@@ -64,7 +64,7 @@ public class Todo {
 	@Override
 	public String toString() {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		return "Todo [no=" + no + ", title=" + title + ", content=" + content + ", regDate=" + sdf.format(regDate) + ", expDate="
-				+ sdf.format(expDate) + "]";
+		return "Todo [no=" + no + ", title=" + title + ", content=" + content + ", regDate=" + sdf.format(regDate)
+				+ ", expDate=" + sdf.format(expDate) + "]";
 	}
 }
