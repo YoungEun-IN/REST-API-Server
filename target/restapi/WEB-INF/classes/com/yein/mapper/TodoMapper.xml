@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yein.mapper.TodoMapper">
+
+	<select id="getList" resultType="com.yein.domain.Todo">
+	<![CDATA[
+		select no,title,content, regDate, expDate
+		from todo
+		order by no
+		]]>
+	</select>
+
+	<insert id="insert">
+		insert into todo (no,title,content, expDate)
+		values
+		(#{no}, #{title}, #{content}, #{expDate})
+	</insert>
+
+	<select id="read" resultType="com.yein.domain.Todo">
+		select no,title,content, regDate,
+		expDate
+		from todo
+		where no = #{no}
+	</select>
+
+	<update id="update">
+		update Todo
+		<set>
+			<if test="title != null">
+				title = #{title},
+			</if>
+			<if test="content != null">
+				content = #{content},
+			</if>
+			<if test="expDate != null">
+				expDate = #{expDate},
+			</if>
+		</set>
+		where no = #{no}
+	</update>
+
+	<delete id="delete">
+		DELETE FROM TODO
+		WHERE no = #{no}
+	</delete>
+</mapper>
